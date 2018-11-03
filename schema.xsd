@@ -1,38 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-
+ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://github.com/kcc112/zadanie2.xml" targetNamespace="https://github.com/kcc112/zadanie2.xml" elementFormDefault="qualified">
 
 <!-- definition of simple elements -->
 <xs:element name="author" type="xs:string"/>
-<xs:element name="brand" type="xs:string"/>
+<xs:element name="brand" type="xs:string" fixed="Dobcel"/>
 <xs:element name="name" type="xs:string"/>
-<xs:element name="description" type="xs:string"/>
+<xs:element name="description">
+ <xs:simpleType>
+  <xs:restriction base="xs:string">
+   <xs:maxLength value="110"/>
+  </xs:restriction>
+ </xs:simpleType>
+</xs:element>
 <xs:element name="footer" type="xs:string"/>
 
 <!-- definition of attributes -->
-<xs:attribute name="date" type="xs:date" />
-<xs:attribute name="lang" type="xs:string"/>
+<xs:attribute name="date" type="xs:date" default="9999-12-12"/>
+
+<xs:attribute name="lang">
+ <xs:simpleType>
+  <xs:restriction base="xs:string">
+   <xs:pattern value="PL|EN"/>
+  </xs:restriction>
+ </xs:simpleType>
+</xs:attribute>
 
 <!-- definition of group attributes -->
 <xs:attributeGroup name="categoryGroupe">
-  <xs:attribute name="name" type="xs:string" use="required"/>
-  <xs:attribute name="catId" type="xs:string" use="required"/>
+ <xs:attribute name="name" type="xs:string" use="required"/>
+ <xs:attribute name="catId" use="required">
+  <xs:simpleType>
+   <xs:restriction base="xs:string">
+    <xs:pattern value="[c][0-9][0-9]"/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
 </xs:attributeGroup>
 
 <xs:attributeGroup name="unitGroupe">
-  <xs:attribute name="name" type="xs:string" use="required"/>
-  <xs:attribute name="unitId" type="xs:string" use="required"/>
+ <xs:attribute name="name" type="xs:string" use="required"/>
+ <xs:attribute name="unitId" use="required">
+  <xs:simpleType>
+   <xs:restriction base="xs:string">
+    <xs:pattern value="[u][0-9][0-9]([0-9])*"/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
 </xs:attributeGroup>
 
 <xs:attributeGroup name="manufacturerGroupe">
-  <xs:attribute name="name" type="xs:string" use="required"/>
-  <xs:attribute name="manId" type="xs:string" use="required"/>
+ <xs:attribute name="name" type="xs:string" use="required"/>
+ <xs:attribute name="manId" use="required">
+  <xs:simpleType>
+   <xs:restriction base="xs:string">
+    <xs:pattern value="[m][0-9][0-9]([0-9])*"/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
 </xs:attributeGroup>
 
 <xs:attributeGroup name="productGroupe">
-  <xs:attribute name="catId" type="xs:string" use="required"/>
-  <xs:attribute name="id" type="xs:string" use="required"/>
+ <xs:attribute name="catId" type="xs:string" use="required"/>
+ <xs:attribute name="id" use="required">
+  <xs:simpleType>
+   <xs:restriction base="xs:string">
+    <xs:pattern value="[p][0-9][0-9]([0-9])*"/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
 </xs:attributeGroup>
 
 
@@ -97,7 +132,7 @@
 <xs:element name="creators">
   <xs:complexType>
     <xs:sequence>
-		<xs:element ref="author" maxOccurs="2"/>
+	 <xs:element ref="author" maxOccurs="2"/>
     </xs:sequence>
   </xs:complexType>
 </xs:element>
@@ -111,12 +146,12 @@
 <xs:element name="alcohol_wholesale">
   <xs:complexType>
     <xs:sequence>
-		<xs:element ref="brand" maxOccurs="1"/>
-		<xs:element ref="categories" maxOccurs="1"/>
-		<xs:element ref="units" maxOccurs="1"/>
-		<xs:element ref="manufacturers" maxOccurs="1"/>
-		<xs:element ref="products" maxOccurs="1"/>
-		<xs:element ref="footer" maxOccurs="1"/>
+	 <xs:element ref="brand" maxOccurs="1"/>
+	 <xs:element ref="categories" maxOccurs="1"/>
+	 <xs:element ref="units" maxOccurs="1"/>
+	 <xs:element ref="manufacturers" maxOccurs="1"/>
+	 <xs:element ref="products" maxOccurs="1"/>
+	 <xs:element ref="footer" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
 </xs:element>
@@ -150,7 +185,7 @@
 
 <xs:element name="unit">
   <xs:complexType>
-	 <xs:attributeGroup ref="unitGroupe"/>
+   <xs:attributeGroup ref="unitGroupe"/>
   </xs:complexType>
 </xs:element>
 
@@ -181,12 +216,12 @@
 <xs:element name="product">
   <xs:complexType>
 	<xs:sequence>
-		<xs:element ref="name" maxOccurs="1"/>
-		<xs:element ref="producent" maxOccurs="1"/>
-		<xs:element ref="price" maxOccurs="1"/>
-		<xs:element ref="description" maxOccurs="1"/>
-		<xs:element ref="volume" maxOccurs="1"/>
-		<xs:element ref="strength" maxOccurs="1"/>
+	 <xs:element ref="name" maxOccurs="1"/>
+	 <xs:element ref="producent" maxOccurs="1"/>
+	 <xs:element ref="price" maxOccurs="1"/>
+	 <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+	 <xs:element ref="volume" maxOccurs="1"/>
+	 <xs:element ref="strength" minOccurs="0" maxOccurs="1"/>
 	</xs:sequence>
 	<xs:attributeGroup ref="productGroupe"/>
   </xs:complexType>
