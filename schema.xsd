@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
  <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://github.com/kcc112/zadanie2.xml" targetNamespace="https://github.com/kcc112/zadanie2.xml" elementFormDefault="qualified">
 
 <!-- definition of simple elements -->
@@ -13,17 +13,6 @@
  </xs:simpleType>
 </xs:element>
 <xs:element name="footer" type="xs:string"/>
-
-<!-- definition of attributes -->
-<xs:attribute name="date" type="xs:date" default="9999-12-12"/>
-
-<xs:attribute name="lang">
- <xs:simpleType>
-  <xs:restriction base="xs:string">
-   <xs:pattern value="PL|EN"/>
-  </xs:restriction>
- </xs:simpleType>
-</xs:attribute>
 
 <!-- definition of group attributes -->
 <xs:attributeGroup name="categoryGroupe">
@@ -116,7 +105,13 @@
   <xs:element ref="information" maxOccurs="1"/>
    <xs:element ref="alcohol_wholesale" maxOccurs="1"/>
  </xs:sequence>
- <xs:attribute ref="lang"/>
+ <xs:attribute name="lang">
+  <xs:simpleType>
+   <xs:restriction base="xs:string">
+    <xs:pattern value="PL|EN"/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
 </xs:complexType>
 
 
@@ -139,7 +134,7 @@
 
 <xs:element name="last_mod">
   <xs:complexType>
-	<xs:attribute ref="date" use="required"/>
+	<xs:attribute name="date" type="xs:date" default="9999-12-12"/>
   </xs:complexType>
 </xs:element>
 
